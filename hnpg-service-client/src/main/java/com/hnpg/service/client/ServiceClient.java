@@ -20,13 +20,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @SuppressWarnings({ "deprecation", "unchecked" })
 public class ServiceClient {
 
-	static final String BASE_URL = "http://localhost:8080/hnpg/service/";
+	static final String BASE_URL = "http://54.86.143.9:8080/hnpg/service/";
 	static final String FIND_ALL = "location/findall.htm";
 	static final String FIND_ONE = "location/findone.htm";
 	static final String INSERT = "location/insert.htm";
 	static final String UPDATE = "location/update.htm";
 
-	private static ServiceResponse getLocation(boolean all, String id) throws ClientProtocolException, IOException {
+	public static ServiceResponse getLocation(boolean all, String id) throws ClientProtocolException, IOException {
 		String url = "";
 		if (all) {
 			url = BASE_URL + FIND_ALL;
@@ -56,7 +56,7 @@ public class ServiceClient {
 		return sReponse;
 	}
 
-	private static ServiceResponse updateLocation(LinkedHashMap<String, Object> data, boolean update)
+	public static ServiceResponse updateLocation(LinkedHashMap<String, Object> data, boolean update)
 			throws ClientProtocolException, IOException {
 		String url = "";
 		if (update) {
@@ -94,12 +94,15 @@ public class ServiceClient {
 
 	public static void main(String[] args) {
 		try {
-			ServiceResponse response = getLocation(false, "5713f7d5dbbc08c2dbaea56a");
-			LinkedHashMap<String, Object> data = (LinkedHashMap<String, Object>) response.getData();
-			data.put("NewVal", "I M New Val");
+//			ServiceResponse response = getLocation(false, "5713f7d5dbbc08c2dbaea56a");
+//			LinkedHashMap<String, Object> data = (LinkedHashMap<String, Object>) response.getData();
+//			data.put("NewVal", "I M New Val");
+//
+//			updateLocation(data, true);
 
-			updateLocation(data, true);
-
+			LinkedHashMap<String, Object> data = new LinkedHashMap<String, Object>();
+			data.put("TYPE", "HOSTEL");
+			updateLocation(data,false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
